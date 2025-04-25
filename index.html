@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove background and download for free</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", serif;
+        }
+        body{
+            width: 100%;
+            height: 100%;
+            background: rgb(34, 39, 43);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .logo{
+           width: 100%;
+           height: 80px;
+           display: flex;
+           align-items: center;
+           justify-content: start;
+           padding: 20px;
+           box-sizing: border-box;
+        }
+        .logo h1{
+            color: aliceblue;
+            font-size: 30px;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        .logo button{
+            padding: 12px 20px;
+            background: #f9004d;
+            color: aliceblue;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .logo button:hover{
+            border: 2px solid #4ddff9;
+            background: transparent;
+            transform: scale(1.1);
+        }
+        .main{
+            width: 100%;
+            min-height: calc( 100vh - 80px );
+            background-color:  rgb(39, 49, 57);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .style1{
+            max-width: 500px;
+            width: 90%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .style2{
+            max-width: 500px;
+            width: 90%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 10%;
+            box-shadow: 0 0 25px aqua,
+                      0 0 50px aqua,
+                      0 0 100px aqua;
+        }
+        #loading{
+            filter: drop-shadow(2px 2px 10px black);
+            display: none;
+        }
+        .image{
+            width: 300px;
+            height: 300px;
+            background-image: url("transparent.jpg");
+            display: flex;
+            position: relative;
+            border-radius: 10%;
+            box-shadow: 0 0 25px rgb(255, 0, 0),
+            0 0 50px rgb(255, 0, 0),
+            0 0 100px rgb(233, 237, 3);
+        }
+        .image1{
+            width: 300px;
+            animation: remove 15s linear infinite;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        #withbg{
+            width: 300px;
+        }
+        .image2{
+            width: 300px;
+            position: absolute;
+            overflow: hidden;
+        }
+        #withoutbg{
+            width: 300px;
+        }
+        .text1{
+            color: aliceblue;
+            font-size: 15px;
+            font-weight: 300;
+            margin-right: 10px;
+            text-align: right;
+            justify-content: right;
+            box-sizing: border-box;
+        }
+        .text{
+            width: 100%;
+            height: 25%;
+            color: #00f9ec;
+            text-align: center;
+            background-clip: text;
+            font-size: 2.5vmax;
+            font-weight: 600;
+        }
+        .text:hover{
+            box-shadow: 0 0 25px aqua,
+                        0 0 50px aqua,
+                        0 0 100px aqua;
+        }
+        .upload-image{
+            width: 90%;
+            height: 85%;
+            background-color: rgb(32, 40, 47);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px black;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .inner-upload-image{
+            width: 90%;
+            height: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+            color: aliceblue;
+            font-size: 20px;
+            background-color: rgb(25, 29, 33);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .inner-upload-image:hover{
+            background-color: rgb(56, 66, 76);
+            box-shadow: inset 2px 2px 2px black;
+        }
+        #input-image{
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        #upload-btn{
+           width: 40%;
+           height: 12%;
+           background: #f9004d;
+           color: aliceblue;
+           border: none;
+           outline: none;
+           border-radius: 10px;
+           font-size: 15px;
+           cursor: pointer;
+           transition: all 0.3s;
+        }
+        #upload-btn:hover{
+            border: 2px solid #4ddff9;
+            background: transparent;
+            transform: scale(1.1);
+          }
+        
+        .result{
+            width: 50%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+            display: none;
+        }
+        .mainbox{
+            width: 400px;
+            position: relative;
+            background-image: url("transparent.jpg");
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px black;
+        }
+        .resultImg1{
+           width: 0px;
+           animation: remove1 8s linear 1;
+           overflow: hidden;
+        }
+        .resultImg2{
+            width: 400px;
+            position: absolute;
+            top: 0;
+        }
+        .resultImg1 img{
+            width: 400px;
+         }
+         .resultImg2 img{
+             width: 400px;
+         }
+        
+         .btns{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+         }
+         #download{
+            padding: 12px 20px;
+            background: #f9004d;
+            color: aliceblue;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+         }
+         #download:hover{
+            border: 2px solid #16c9f1;
+            background: transparent;
+            transform: scale(1.1);
+          }
+         #reset{
+            padding: 12px 20px;
+            background: aqua;
+            color: rgb(15, 15, 16);
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+         }
+         #reset:hover{
+            border: 2px solid #f9004d;
+            background: transparent;
+            transform: scale(1.1);
+          }
+          .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: transform 0.2s;
+        }
+        .color-option:hover {
+            transform: scale(1.2);
+        }
+        .bg-preview {
+            width: 400px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bg-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        .bg-color {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .download-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .download-btn {
+            padding: 10px 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .download-btn:hover {
+            background: #45a049;
+        }
+
+        @keyframes remove {
+            0%,100%{
+                width: 100%;
+            }
+            50%{
+                width: 0%;
+            }
+        }
+        @keyframes remove1 {
+            0%{
+                width: 400px;
+            }
+            100%{
+                width: 0px;
+            }
+        }
+        @media (max-width:430px) {
+            .mainbox{
+                width: 250px;
+            }
+            .resultImg1{
+               width: 0px;
+               animation: remove2 8s linear 1;
+               overflow: hidden;
+            }
+            .resultImg2{
+                width: 250px;
+            }
+            .resultImg1 img{
+                width: 250px;
+             }
+             .resultImg2 img{
+                width: 250px;
+             }
+            .btns{
+                flex-direction: column;
+                gap: 10px;
+            }
+            .bg-preview {
+                width: 250px;
+                height: 250px;
+            }
+        }
+        @keyframes remove2 {
+            0%{
+                width: 250px;
+            }
+            100%{
+                width: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text1">Maked By Niuton</div>
+    <div class="logo">
+        <img src="logo.svg" alt="">
+        <h1>Remove.bg</h1>
+            <button><a target="_blank" href="https://www.webintoapp.com/store/713658">Get App</a></button>
+    </div>
+    <div class="main">
+        <div class="style1">
+            <div class="image">
+                <div class="image1"><img src="withbg1.jpg" id="withbg" alt=""></div>
+                <div class="image2"><img src="without1.png" id="withoutbg" alt=""></div>
+            </div>
+            <div class="text">Remove Any Image Backgound & Download in PNG</div>
+        </div>
+        <div class="style2">
+            <div class="upload-image">
+             <div class="inner-upload-image">
+                <img src="" alt="" id="input-image">
+                <input id="filepicker" type="file" hidden accept="image/*">
+                <img src="add.svg" id="icon" alt="">
+                <span>Upload Image</span>
+             </div>
+             <button id="upload-btn"> Upload</button>
+            </div>
+            <img src="loading.gif" id="loading" alt="" width="100px">
+        </div>
+        <div class="result">
+            <div class="mainbox">
+                <div class="resultImg1"><img src="" alt=""></div>
+                <div class="resultImg2"><img src="" alt=""></div>
+            </div>
+            
+            <div class="bg-preview">
+                <div class="bg-color"></div>
+                <img id="preview-image" src="" alt="">
+            </div>
+            
+            <div class="color-options">
+                <div class="color-option" style="background-color: #ffffff;" data-color="#ffffff"></div>
+                <div class="color-option" style="background-color: #000000;" data-color="#000000"></div>
+                <div class="color-option" style="background-color: #ff0000;" data-color="#ff0000"></div>
+                <div class="color-option" style="background-color: #00ff00;" data-color="#00ff00"></div>
+                <div class="color-option" style="background-color: #0000ff;" data-color="#0000ff"></div>
+                <div class="color-option" style="background-color: #ffff00;" data-color="#ffff00"></div>
+                <div class="color-option" style="background-color: #ff00ff;" data-color="#ff00ff"></div>
+                <div class="color-option" style="background-color: #00ffff;" data-color="#00ffff"></div>
+                <div class="color-option" style="background-color: #ff9900;" data-color="#ff9900"></div>
+                <div class="color-option" style="background-color: #9900ff;" data-color="#9900ff"></div>
+                <div class="color-option" style="background-color: #0099ff;" data-color="#0099ff"></div>
+                <div class="color-option" style="background-color: #ff0099;" data-color="#ff0099"></div>
+                <div class="color-option" style="background-color: #99ff00;" data-color="#99ff00"></div>
+                <div class="color-option" style="background-color: #3366ff;" data-color="#3366ff"></div>
+                <div class="color-option" style="background-color: #ff3366;" data-color="#ff3366"></div>
+            </div>
+            
+            <div class="btns">
+                <button id="download">Download Transparent PNG</button>
+                <button id="reset">New Upload</button>
+            </div>
+            
+            <div class="download-options">
+                <button id="download-with-bg" class="download-btn">Download with Background</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let fileInput = document.getElementById("filepicker");
+        let innerImage = document.querySelector(".inner-upload-image");
+        let image=null;
+        let url = null;
+        let InputImg = document.getElementById("input-image")
+        let icon = document.querySelector("#icon")
+        let span = document.querySelector("span")
+        let OriginalImg = document.querySelector(".resultImg1 img")
+        let GeneratedImg =document.querySelector(".resultImg2 img")
+        let PreviewImg = document.getElementById("preview-image")
+        let BgColorElement = document.querySelector(".bg-color")
+
+        let uploadBtn = document.querySelector("#upload-btn")
+        let style2 = document.querySelector(".style2")
+        let resultPage = document.querySelector(".result")
+        let loading = document.querySelector("#loading")
+        let downloadBtn =document.querySelector("#download")
+        let resetBtn =document.querySelector("#reset")
+        let downloadWithBgBtn = document.getElementById("download-with-bg")
+        let colorOptions = document.querySelectorAll(".color-option")
+
+        let currentBgColor = "#ffffff"; // Default white background
+
+        function handleUpload(){
+            const ApiKey = "M6XK4DiDCeEUTheUAyWrxCod";
+            const formdata = new FormData();
+            formdata.append("image_file", image);
+            formdata.append("size", "auto");
+
+            fetch("https://api.remove.bg/v1.0/removebg",{
+                method: "POST",
+                headers: { "X-Api-Key":ApiKey  },
+                body: formdata,
+            })
+            .then(function(response){
+                return response.blob();
+            })
+            .then(function(blob){
+                loading.style.display="none";
+                style2.style.display="none";
+                resultPage.style.display="flex";
+              url = URL.createObjectURL(blob);
+              GeneratedImg.src= url;
+              PreviewImg.src = url;
+              updatePreview();
+            })
+            .catch(err => console.error("Error removing background:", err))
+        }
+
+        // Update preview with selected background color
+        function updatePreview() {
+            BgColorElement.style.backgroundColor = currentBgColor;
+        }
+
+        // Set up color selection
+        colorOptions.forEach(option => {
+            option.addEventListener("click", function() {
+                currentBgColor = this.getAttribute("data-color");
+                updatePreview();
+            });
+        });
+
+        // Download image with selected background color
+        downloadWithBgBtn.addEventListener("click", function() {
+            if (!url) return;
+            
+            // Create a canvas to combine the transparent image with the background color
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                
+                // Fill with background color
+                ctx.fillStyle = currentBgColor;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw the image
+                ctx.drawImage(img, 0, 0);
+                
+                // Convert to blob and download
+                canvas.toBlob(function(blob) {
+                    const downloadUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = downloadUrl;
+                    a.download = 'image_with_bg_' + currentBgColor + '.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(downloadUrl);
+                });
+            };
+            
+            img.src = url;
+        });
+
+        innerImage.addEventListener("click" , ()=>{
+            fileInput.click();
+        });
+        
+        fileInput.addEventListener("change" ,()=>{
+            image = fileInput.files[0];
+            if(!fileInput)return;
+            let reader = new FileReader();
+            reader.onload=(e)=> {   
+                InputImg.src = e.target.result;
+                InputImg.style.display="block";
+                icon.style.display="none";
+                span.style.display="none";
+                OriginalImg.src = e.target.result;
+            }
+            reader.readAsDataURL(image);
+        });
+        
+        uploadBtn.addEventListener("click",()=>{
+            if (!image) {
+                alert("Please select an image first");
+                return;
+            }
+            handleUpload();
+            loading.style.display="block";
+        });
+        
+        function download(){
+            if (!url) return;
+            
+            fetch(url)
+            .then(res =>res.blob())
+            .then(file=>{
+                let a= document.createElement("a");
+                a.href = URL.createObjectURL(file);
+                a.download = 'transparent_' + new Date().getTime() + '.png';
+                a.click();
+            })
+            .catch(err => console.error("Download error:", err));
+        }
+        
+        downloadBtn.addEventListener("click" , ()=>{
+            download();
+        });
+        
+        resetBtn.addEventListener("click" , ()=>{
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
